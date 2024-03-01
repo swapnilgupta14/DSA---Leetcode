@@ -1,9 +1,7 @@
-#include <string>
-#include <algorithm>
-
 class Solution {
 public:
     std::string maximumOddBinaryNumber(std::string s) {
+        // O(n) solution
         int ones = std::count(s.begin(), s.end(), '1');
         int zeros = s.size() - ones;
         if (ones == 0) return "";

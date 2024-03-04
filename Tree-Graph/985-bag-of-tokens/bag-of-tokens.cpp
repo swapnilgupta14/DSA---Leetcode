@@ -11,22 +11,22 @@ public:
         int score = 0;
         int m_score = 0;
         int n = tokens.size();
-        vector<bool> flag(n, true);
+        // vector<bool> flag(n, true);
         sort(tokens.begin(), tokens.end());
         int i =0;
         int j = n-1;
         while(i <= j){
             cout << i << " " << j << "\n";
-            if(power >= tokens[i] && flag[i]){
+            if(power >= tokens[i]){
                 score+=1;
                 m_score = max(score, m_score);
                 power -= tokens[i];
-                flag[i] = false;
+                // flag[i] = false;
                 i++;
             }else if(score > 0){
                 power += tokens[j];
                 score -= 1;
-                flag[j] = false;
+                // flag[j] = false;
                 j--;
             }else{break;
 }        }

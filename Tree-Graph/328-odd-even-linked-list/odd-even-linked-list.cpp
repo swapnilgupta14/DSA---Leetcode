@@ -16,20 +16,15 @@ public:
         ListNode* even = head->next;
         ListNode* temp = head->next;
         while(odd->next->next != NULL || even->next->next != NULL){
-            // cout << odd->val << ", " << even->val;
             if(odd->next !=NULL && odd->next->next != NULL){
                 cout << odd->val;
                 odd->next = odd->next->next;
                 odd = odd->next;
-                cout << " ka next ->" << odd->val << endl;
             }
             if(even->next !=NULL && even->next->next != NULL) {
-                // cout << "even";
                 cout << even->val;
                 even->next = even->next->next;
                 even = even->next;
-                cout << " ka next ->" << even->val << endl;
-
             }
             if(odd == NULL || even == NULL || odd->next== NULL || even->next == NULL) break;
         }

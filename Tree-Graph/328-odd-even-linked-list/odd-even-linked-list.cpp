@@ -17,12 +17,12 @@ public:
         ListNode* temp = head->next;
         while(odd->next->next != NULL || even->next->next != NULL){
             if(odd->next !=NULL && odd->next->next != NULL){
-                cout << odd->val;
+                // cout << odd->val;
                 odd->next = odd->next->next;
                 odd = odd->next;
             }
             if(even->next !=NULL && even->next->next != NULL) {
-                cout << even->val;
+                // cout << even->val;
                 even->next = even->next->next;
                 even = even->next;
             }

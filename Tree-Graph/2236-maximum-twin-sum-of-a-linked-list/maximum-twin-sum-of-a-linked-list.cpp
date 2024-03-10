@@ -10,6 +10,7 @@
  */
 class Solution {
 public:
+    // using stack
     int pairSum(ListNode* head) {
         ListNode* temp = head;
         int count = 0;
@@ -26,15 +27,12 @@ public:
         while(i <= count && temp!=NULL){
             if(i <= half) st.push(temp->val);
             else{
-                cout << st.top() << "\n";
                 int sum = st.top() + temp->val;
                 if (sum> max_sum) max_sum = sum;
                 st.pop();
             }
-            cout << temp->val << endl;
             temp = temp->next;
             i++;
-            cout << "\n";
         }
         return max_sum;
     }

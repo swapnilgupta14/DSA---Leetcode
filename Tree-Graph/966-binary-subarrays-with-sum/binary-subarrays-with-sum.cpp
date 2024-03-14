@@ -8,8 +8,6 @@ public:
                 sum += nums[j];
                 if(sum == goal) count++;
             }
-        }
-        for(int i=0; i<nums.size(); i++){
             if(nums[i] == goal) count+=1;
         }
         return count;

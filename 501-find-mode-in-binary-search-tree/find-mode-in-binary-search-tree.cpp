@@ -10,7 +10,7 @@
  * };
  */
 class Solution {
-public:
+private:
     void helper(TreeNode* node, unordered_map<int, int> &mp){
         if(node == NULL) return;
         if(mp.find(node->val) != mp.end()){
@@ -22,6 +22,7 @@ public:
         helper(node->right, mp);
 
     }
+public:
     vector<int> findMode(TreeNode* root) {
         unordered_map<int, int> mp;
         vector<int> ans;

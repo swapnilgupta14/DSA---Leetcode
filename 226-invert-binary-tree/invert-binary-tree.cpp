@@ -10,24 +10,20 @@
  * };
  */
 class Solution {
+private:
+    void helper(TreeNode* node){
+        if(node == NULL) return;
+        TreeNode* temp = node->left;
+        node->left = node->right;
+        node->right = temp;
+        helper(node->left);
+        helper(node->right);
+    }
 public:
     TreeNode* invertTree(TreeNode* root) {
-        if(root == nullptr){
-            return root;
-        }
-        TreeNode * ans = root;
-        solve(root);
-        return ans;
-        
-    }
-    void solve(TreeNode *node){
-        if(node){
-            TreeNode *temp = node->left;
-            node->left = node->right;
-            node->right = temp;
-            solve(node->left);
-            solve(node->right);
-        }
-        return;
+        if(root == NULL || (root->left == NULL) && (root->right == NULL)) return root;
+        TreeNode* temp = root;
+        helper(root);
+        return temp;
     }
 };

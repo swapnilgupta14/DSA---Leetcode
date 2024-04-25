@@ -20,60 +20,41 @@ private:
         populate(node->right, mp);
     }
 
-    void descendants(TreeNode* node, vector<int>& ans, int k) {
-        if (node == NULL)
-            return;
-        descendants(node->left, ans, k - 1);
-        descendants(node->right, ans, k - 1);
-        if (k == 0) {
-            ans.push_back(node->val);
-            return;
-        }
-    }
-
-    void precedents(TreeNode* node, vector<int> &ans, unordered_map<TreeNode*,TreeNode*> &mp, int k){
+    void radial(TreeNode* node, vector<int> &ans, unordered_map<TreeNode*,TreeNode*> &mp, int k){
         if(node == NULL || k < 0) return;
-        
-        // Use BFS to find nodes that are k steps away in radial outward direction
+
         queue<TreeNode*> q;
-        unordered_set<TreeNode*> visited;
-        
+        unordered_map<TreeNode*, bool> visited; 
         q.push(node);
-        visited.insert(node);
-        
+        visited[node] = true;
+
         int steps = 0;
-        
+
         while(!q.empty() && steps <= k){
+
             int size = q.size();
-            
             for(int i = 0; i < size; i++){
                 TreeNode* curr = q.front();
                 q.pop();
-                
-                // If we reach a node that is k steps away, add it to the answer
+
                 if(steps == k){
                     ans.push_back(curr->val);
                 }
-                
-                // Add unvisited neighbors to the queue
-                if(curr->left && visited.find(curr->left) == visited.end()){
+
+                if(curr->left && !visited[curr->left]){
                     q.push(curr->left);
-                    visited.insert(curr->left);
+                    visited[curr->left] = true;
                 }
-                
-                if(curr->right && visited.find(curr->right) == visited.end()){
+                if(curr->right && !visited[curr->right]){
                     q.push(curr->right);
-                    visited.insert(curr->right);
+                    visited[curr->right] = true;
                 }
-                
-                // Add parent to the queue
                 TreeNode* parent = mp[curr];
-                if(parent && visited.find(parent) == visited.end()){
+                if(parent && !visited[parent]){
                     q.push(parent);
-                    visited.insert(parent);
+                    visited[parent] = true;
                 }
             }
-            
             steps++;
         }
     }
@@ -83,8 +64,7 @@ public:
         unordered_map<TreeNode*, TreeNode*> mp;
         populate(root, mp);
         vector<int> ans;
-        // descendants(target, ans, k);
-        precedents(target, ans, mp, k);
+        radial(target, ans, mp, k);
         return ans;
     }
 };

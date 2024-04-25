@@ -10,18 +10,20 @@
  * };
  */
 class Solution {
+private:
+    int helper(TreeNode* node, int &max_dia){
+        if(node == NULL) return 0;
+        int lh = helper(node->left, max_dia);
+        int rh = helper(node->right, max_dia);
+        max_dia = max(max_dia, lh+rh);
+        return (1 + max(lh, rh));
+    }
 public:
     int diameterOfBinaryTree(TreeNode* root) {
-        int count = 0;
-        find(root, count);
-        return count;
-    }
-
-    int find(TreeNode *root, int &count){
-        if(root == nullptr) return 0;
-        int lh = find(root->left,count);
-        int rh = find(root->right, count);
-        count = max(count, lh+rh);
-        return 1 + max(lh, rh);
+        if(root == NULL) return 0;
+        int max_dia = 0;
+        helper(root, max_dia);
+        return max_dia; 
     }
 };
+

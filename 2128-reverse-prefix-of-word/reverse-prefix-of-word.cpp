@@ -5,7 +5,6 @@ public:
             if(word[i] == ch){
                 int j=0;
                 while(j < i){
-                    cout << i << " and " << j << "\n";
                     char temp = word[j];
                     word[j] = word[i];
                     word[i] = temp;

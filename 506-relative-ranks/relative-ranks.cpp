@@ -1,10 +1,3 @@
-#include <vector>
-#include <string>
-#include <queue>
-#include <unordered_map>
-
-using namespace std;
-
 class Solution {
 public:
     vector<string> findRelativeRanks(vector<int>& score) {

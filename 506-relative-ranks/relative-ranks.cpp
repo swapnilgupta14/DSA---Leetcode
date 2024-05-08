@@ -11,20 +11,21 @@ public:
 
         int rank = 1;
         while (!pq.empty()) {
-            auto [sc, idx] = pq.top();
+            int sc = pq.top().first;
+            int idx = pq.top().second;
             pq.pop();
-            switch(rank){
-                case 1:
-                    ans[idx] = "Gold Medal";
-                    break;
-                case 2:
-                    ans[idx] = "Silver Medal";
-                    break;
-                case 3:
-                    ans[idx] = "Bronze Medal";
-                    break;
-                default:
-                    ans[idx] = to_string(rank);
+            switch (rank) {
+            case 1:
+                ans[idx] = "Gold Medal";
+                break;
+            case 2:
+                ans[idx] = "Silver Medal";
+                break;
+            case 3:
+                ans[idx] = "Bronze Medal";
+                break;
+            default:
+                ans[idx] = to_string(rank);
             }
             rank++;
         }

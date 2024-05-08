@@ -15,9 +15,8 @@ public:
         if(node == NULL) return true;
         if(node->val >= maxVal || node->val <= minVal) return false;
         bool lh = check(node->left, minVal, node->val);
-        if(lh == false) return false;
         bool rh = check(node->right, node->val, maxVal);
-        if(rh == false) return false;
+        if(rh == false || lh == false) return false;
         // if(lh==false || rh==false) return false;
         return true;
     }

@@ -13,14 +13,18 @@ public:
         while (!pq.empty()) {
             auto [sc, idx] = pq.top();
             pq.pop();
-            if (rank == 1) {
-                ans[idx] = "Gold Medal";
-            } else if (rank == 2) {
-                ans[idx] = "Silver Medal";
-            } else if (rank == 3) {
-                ans[idx] = "Bronze Medal";
-            } else {
-                ans[idx] = to_string(rank);
+            switch(rank){
+                case 1:
+                    ans[idx] = "Gold Medal";
+                    break;
+                case 2:
+                    ans[idx] = "Silver Medal";
+                    break;
+                case 3:
+                    ans[idx] = "Bronze Medal";
+                    break;
+                default:
+                    ans[idx] = to_string(rank);
             }
             rank++;
         }

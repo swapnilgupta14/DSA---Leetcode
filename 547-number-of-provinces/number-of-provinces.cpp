@@ -1,5 +1,37 @@
 class Solution {
 private:
+    void dfs(int i, vector<vector<int>> &isConnected, vector<int> &vis){
+        if(vis[i]){
+            return;
+        }
+        vis[i] = 1;
+        for(int j=0; j<isConnected.size(); j++){
+            if(isConnected[i][j]){
+                dfs(j, isConnected, vis);
+            }
+        }
+    }
+public:
+    int findCircleNum(vector<vector<int>>& isConnected) {
+        int s = isConnected.size();
+       
+        vector<int> vis(s, 0);
+        int count = 0;
+
+        for(int i=0; i<s; i++){
+            if(!vis[i]){
+                dfs(i, isConnected, vis);
+                count ++;
+            }
+        }
+
+        return count;
+
+    }
+};
+
+class Solution_Adjacency_Matrix {
+private:
     void dfs(int i, vector<vector<int>> &adj, vector<int> &vis){
         if(vis[i]){
             return;

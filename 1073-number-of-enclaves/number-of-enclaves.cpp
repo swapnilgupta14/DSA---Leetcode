@@ -1,7 +1,6 @@
 class Solution {
 private:
     void dfs(int i, int j, vector<vector<int>>& grid, vector<vector<int>> &vis ){
-        // cout << "i= " << i << " j=" << j << "\n";
         vis[i][j] = 0;
         int n = grid.size();
         int m = grid[0].size();
@@ -10,7 +9,7 @@ private:
         for(auto it: dir){
             int nx = i + it.first;
             int ny = j + it.second;
-            if(nx >= 0 && ny >= 0 && nx < n && ny < m && grid[nx][ny] == 1 && vis[nx][ny] == 1){
+            if(nx >= 0 && ny >= 0 && nx < n && ny < m && vis[nx][ny] == 1){
                 vis[nx][ny] = 0;
                 dfs(nx, ny, grid, vis);
             }

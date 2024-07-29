@@ -10,7 +10,7 @@ public:
         for (int it: nums){
             mp[it] +=1;
         }
-        for(auto it: mp){
+        for(pair it: mp){
             if(it.second > n/3) ans.push_back(it.first);
         }
         return ans;

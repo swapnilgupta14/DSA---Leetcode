@@ -3,7 +3,6 @@ private:
     void backtrack(int opening, int closing, vector<string>& ans, string& temp) {
         cout << opening << ", " << closing << " \n";
         if (opening > closing) return;
-        
         if (opening == 0 && closing == 0) {
             ans.push_back(temp);
             return;

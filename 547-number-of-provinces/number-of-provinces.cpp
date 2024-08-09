@@ -1,71 +1,32 @@
 class Solution {
 private:
-    void dfs(int i, vector<vector<int>> &isConnected, vector<int> &vis){
-        if(vis[i]){
-            return;
-        }
+    void dfs(int i, vector<int> &vis, vector<vector<int>> &adj) {
+        if (vis[i] == 1) return;
         vis[i] = 1;
-        for(int j=0; j<isConnected.size(); j++){
-            if(isConnected[i][j]){
-                dfs(j, isConnected, vis);
-            }
+        for(auto it: adj[i]){
+            if(!vis[it]) dfs(it, vis, adj);
         }
     }
+
 public:
     int findCircleNum(vector<vector<int>>& isConnected) {
-        int s = isConnected.size();
-       
-        vector<int> vis(s, 0);
-        int count = 0;
-
-        for(int i=0; i<s; i++){
-            if(!vis[i]){
-                dfs(i, isConnected, vis);
-                count ++;
-            }
-        }
-
-        return count;
-
-    }
-};
-
-class Solution_Adjacency_Matrix {
-private:
-    void dfs(int i, vector<vector<int>> &adj, vector<int> &vis){
-        if(vis[i]){
-            return;
-        }
-        vis[i] = 1;
-
-        for(auto it : adj[i]){
-            if(!vis[it]){
-                dfs(it, adj, vis);
-            }
-        }
-    }
-public:
-    int findCircleNum(vector<vector<int>>& isConnected) {
-        int s = isConnected.size();
-        vector<vector<int>> adj(s);
-        for(int i=0; i<s; i++){
-            for(int j=0; j<s; j++){
-                if(isConnected[i][j]){
+        // creating adjacency matrix
+        int n = isConnected.size();
+        vector<vector<int>> adj(n);
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if (isConnected[i][j] == 1)
                     adj[i].push_back(j);
-                }
             }
         }
-
-        vector<int> vis(s, 0);
         int count = 0;
-        for(int i=0; i<s; i++){
-            if(!vis[i]){
-                dfs(i, adj, vis);
-                count ++;
+        vector<int> vis(n, 0);
+        for (int i = 0; i < n; i++) {
+            if (vis[i] != 1) {
+                count += 1;
+                dfs(i, vis, adj);
             }
         }
-
         return count;
-
     }
 };

@@ -1,31 +1,28 @@
 class Solution {
-public:
-
-    vector<vector<int>> res;
-    int n;
-    void compute(int idx,vector<int>& candidates, int target,vector<int> temp){
-        if(target==0){
-            res.push_back(temp);
+private:
+    void backtrack(int idx, int sum, int target, vector<int>& candidates,
+                   vector<int>& temp, set<vector<int>>& ans) {
+        int n = candidates.size();
+        
+        if (sum > target) return;        
+        if (sum == target) {
+            ans.insert(temp);
             return;
         }
-
-        if(target<0 || idx==n){
-            return;
+        for (int i = idx; i < n; i++) {
+            if (i > idx && candidates[i] == candidates[i - 1]) continue;
+            temp.push_back(candidates[i]);
+            backtrack(i + 1, sum + candidates[i], target, candidates, temp, ans);
+            temp.pop_back();
         }
-
-        temp.push_back(candidates[idx]);
-        compute(idx+1,candidates,target-candidates[idx],temp);
-        temp.pop_back();
-        while((idx+1)<n && candidates[idx]==candidates[idx+1]) idx++;
-        compute(idx+1,candidates,target,temp);
-
     }
 
+public:
     vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
-        sort(candidates.begin(),candidates.end());
-        n = candidates.size();
-        vector <int> temp;
-        compute(0,candidates,target,temp);
-        return res;
+        vector<int> temp;
+        set<vector<int>> ans;
+        sort(candidates.begin(), candidates.end());
+        backtrack(0, 0, target, candidates, temp, ans);
+        return vector<vector<int>>(ans.begin(), ans.end());
     }
 };
